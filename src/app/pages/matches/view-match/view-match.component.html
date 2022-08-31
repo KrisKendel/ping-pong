@@ -8,9 +8,14 @@
     <mat-card class="card">
         <div class="info">
             <h1 class="name">{{ match.playerOneFullName }} - {{ match.playerTwoFullName }}</h1>
-            <h1 class="name" *ngFor="let result of match.results">
-                {{ result.playerOneResult }} : {{ result.playerOneResult}}
-            </h1>
+            <div class="result" *ngFor="let result of match.results">
+                <span *ngIf="result.playerOneResult > result.playerTwoResult">
+                    [<strong>{{ result.playerOneResult }}</strong> : {{ result.playerTwoResult }}]
+                </span>
+                <span *ngIf="result.playerOneResult < result.playerTwoResult">
+                    [{{ result.playerOneResult }} : <strong>{{ result.playerOneResult }}</strong>]
+                </span>
+            </div>
         </div>
     </mat-card>
 </div>

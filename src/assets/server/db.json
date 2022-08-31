@@ -1,16 +1,16 @@
 {
   "players": [
     {
-      "id": 3,
-      "firstName": "Pavao3",
-      "lastName": "Perić",
-      "setsWon": 13
-    },
-    {
       "firstName": "Zoran",
       "lastName": "Primorac",
-      "setsWon": 34,
+      "setsWon": 0,
       "id": 4
+    },
+    {
+      "firstName": "Tamara",
+      "lastName": "Boroš",
+      "setsWon": 0,
+      "id": 5
     }
   ],
   "matches": [
@@ -19,26 +19,27 @@
       "playerTwoFullName": "Tamara Boroš",
       "results": [
         {
-          "playerOneResult": 1,
-          "playerTwoResult": 1
-        },
-        {
-          "playerOneResult": 2,
-          "playerTwoResult": 2
-        },
-        {
-          "playerOneResult": 3,
+          "playerOneResult": 11,
           "playerTwoResult": 4
         },
         {
-          "playerOneResult": 5,
-          "playerTwoResult": 6
+          "playerOneResult": 11,
+          "playerTwoResult": 5
         },
         {
-          "playerOneResult": 6,
-          "playerTwoResult": 1
+          "playerOneResult": 2,
+          "playerTwoResult": 11
+        },
+        {
+          "playerOneResult": 5,
+          "playerTwoResult": 11
+        },
+        {
+          "playerOneResult": 7,
+          "playerTwoResult": 11
         }
-      ]
+      ],
+      "id": 1
     }
   ]
 }

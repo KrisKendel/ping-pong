@@ -21,7 +21,12 @@
             <th mat-header-cell mat-sort-header *matHeaderCellDef>Sets</th>
             <td class="name-cell" mat-cell *matCellDef="let match">
                 <span *ngFor="let result of match.results">
-                    [{{ result.playerOneResult }} : {{ result.playerTwoResult }}]
+                    <span *ngIf="result.playerOneResult > result.playerTwoResult">
+                        [<strong>{{ result.playerOneResult }}</strong> : {{ result.playerTwoResult }}]
+                    </span>
+                    <span *ngIf="result.playerOneResult < result.playerTwoResult">
+                        [{{ result.playerOneResult }} : <strong>{{ result.playerTwoResult }}</strong>]
+                    </span>
                 </span>
             </td>
         </ng-container>
