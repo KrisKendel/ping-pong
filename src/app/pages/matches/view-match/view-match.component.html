@@ -8,8 +8,9 @@
     <mat-card class="card">
         <div class="info">
             <h1 class="name">{{ match.playerOneFullName }} - {{ match.playerTwoFullName }}</h1>
-            <h1 class="name">{{ match.playerOnePoints }}</h1>
-            <h1 class="name">{{ match.playerTwoPoints }}</h1>
+            <h1 class="name" *ngFor="let result of match.results">
+                {{ result.playerOneResult }} : {{ result.playerOneResult}}
+            </h1>
         </div>
     </mat-card>
 </div>

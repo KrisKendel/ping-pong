@@ -26,20 +26,29 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
-        <mat-form-field appearance="outline" class="w-50">
-            <mat-label>Player One Points</mat-label>
-            <input matInput type="text" formControlName="playerOnePoints">
-            <mat-error>
-                Please enter player one points
-            </mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="w-50">
-            <mat-label>Player Two Points</mat-label>
-            <input matInput type="text" formControlName="playerTwoPoints">
-            <mat-error>
-                Please enter player two points
-            </mat-error>
-        </mat-form-field>
+
+        <ng-container formArrayName="results">
+            <ng-container *ngFor="let result of results.controls; let i = index">
+                <div [formGroupName]="i">
+                    Set {{ i + 1 }}
+                    <mat-form-field appearance="outline" class="w-50">
+                        <mat-label>Player 1 result</mat-label>
+                        <input matInput type="number" formControlName="playerOneResult">
+                        <mat-error>
+                            Please enter player one result
+                        </mat-error>
+                    </mat-form-field>
+                    :
+                    <mat-form-field appearance="outline" class="w-50">
+                        <mat-label>Player 2 result</mat-label>
+                        <input matInput type="number" formControlName="playerTwoResult">
+                        <mat-error>
+                            Please enter player two result
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </ng-container>
+        </ng-container>
         <button *ngIf="matchId" mat-raised-button color="primary" [disabled]="!matchForm.dirty" type="submit">
             UPDATE
         </button>

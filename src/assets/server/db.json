@@ -9,47 +9,36 @@
     {
       "firstName": "Zoran",
       "lastName": "Primorac",
-      "setsWon": "34",
+      "setsWon": 34,
       "id": 4
-    },
-    {
-      "firstName": "test123",
-      "lastName": "teasa12",
-      "setsWon": 21,
-      "id": 5
-    },
-    {
-      "firstName": "Tamara",
-      "lastName": "Boroš",
-      "setsWon": 23,
-      "id": 10
-    },
-    {
-      "firstName": "asdasd",
-      "lastName": "asdasdsa",
-      "setsWon": 23,
-      "id": 11
     }
   ],
   "matches": [
     {
       "playerOneFullName": "Zoran Primorac",
-      "playerTwoFullName": "test123 teasa12",
-      "playerOnePoints": [
-        10,
-        2,
-        3,
-        3,
-        5
-      ],
-      "playerTwoPoints": [
-        4,
-        10,
-        10,
-        10,
-        10
-      ],
-      "id": 1
+      "playerTwoFullName": "Tamara Boroš",
+      "results": [
+        {
+          "playerOneResult": 1,
+          "playerTwoResult": 1
+        },
+        {
+          "playerOneResult": 2,
+          "playerTwoResult": 2
+        },
+        {
+          "playerOneResult": 3,
+          "playerTwoResult": 4
+        },
+        {
+          "playerOneResult": 5,
+          "playerTwoResult": 6
+        },
+        {
+          "playerOneResult": 6,
+          "playerTwoResult": 1
+        }
+      ]
     }
   ]
 }

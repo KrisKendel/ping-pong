@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { ActivatedRoute, Event, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { filter, map, Observable, scan, withLatestFrom } from 'rxjs';
 import { MatchDTO } from 'src/app/core/entity/response/match/match-dto';
 import { PlayerDTO } from 'src/app/core/entity/response/player/player-dto';
 import { MatchService } from 'src/app/core/services/match.service';
@@ -19,6 +19,7 @@ export class AddEditMatchComponent implements OnInit {
   match: MatchDTO;
   loading = true;
   players$: Observable<PlayerDTO[]>;
+  afterSelection$: Observable<any>;
 
   constructor(
     private route: ActivatedRoute,
@@ -52,22 +53,45 @@ export class AddEditMatchComponent implements OnInit {
     this.matchForm = this.formBuilder.group({
       playerOneFullName: this.formBuilder.control('', Validators.required),
       playerTwoFullName: this.formBuilder.control('', Validators.required),
-      playerOnePoints: this.formBuilder.control('', Validators.required),
-      playerTwoPoints: this.formBuilder.control('', Validators.required),
+      results: this.formBuilder.array([])
     })
+    this.addResult();
   }
 
   generateEditForm(match: MatchDTO): void {
     this.matchForm = this.formBuilder.group({
       playerOneFullName: this.formBuilder.control(match.playerOneFullName, Validators.required),
       playerTwoFullName: this.formBuilder.control(match.playerTwoFullName, Validators.required),
-      playerOnePoints: this.formBuilder.control(match.playerOnePoints, Validators.required),
-      playerTwoPoints: this.formBuilder.control(match.playerTwoPoints, Validators.required),
+      results: this.formBuilder.array([])
+    })
+
+    this.match.results.forEach((element) => {
+      const result = this.formBuilder.group({
+        playerOneResult: this.formBuilder.control(element.playerOneResult, Validators.required),
+        playerTwoResult: this.formBuilder.control(element.playerTwoResult, Validators.required)
+      })
+      this.results.push(result);
     })
   }
 
+  get results() {
+    return this.matchForm.controls["results"] as FormArray;
+  }
+
+  addResult() {
+    for (let i = 0; i < 5; i++) {
+      const resultForm = this.formBuilder.group({
+        playerOneResult: this.formBuilder.control('', Validators.required),
+        playerTwoResult: this.formBuilder.control('', Validators.required)
+      })
+
+      this.results.push(resultForm);
+    }
+
+  }
+
   onPlayerOneSelect(event: any) {
-    console.log(event);
+    console.log(event.value)
   }
 
   onSubmit(formDirective: FormGroupDirective): void {

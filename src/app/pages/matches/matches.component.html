@@ -17,17 +17,14 @@
             <td class="name-cell" mat-cell *matCellDef="let match">{{ match.playerTwoFullName }}</td>
         </ng-container>
 
-        <ng-container matColumnDef="playerOnePoints">
-            <th mat-header-cell mat-sort-header *matHeaderCellDef>Player One Points</th>
-            <td class="name-cell" mat-cell *matCellDef="let match">{{ match.playerOnePoints }}</td>
+        <ng-container matColumnDef="sets">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Sets</th>
+            <td class="name-cell" mat-cell *matCellDef="let match">
+                <span *ngFor="let result of match.results">
+                    [{{ result.playerOneResult }} : {{ result.playerTwoResult }}]
+                </span>
+            </td>
         </ng-container>
-
-        <ng-container matColumnDef="playerTwoPoints">
-            <th mat-header-cell mat-sort-header *matHeaderCellDef>Player Two Points</th>
-            <td class="name-cell" mat-cell *matCellDef="let match">{{ match.playerTwoPoints }}</td>
-        </ng-container>
-
-
 
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef>

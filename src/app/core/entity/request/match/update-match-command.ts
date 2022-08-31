@@ -1,7 +1,8 @@
+import { Result } from '../../response/match/match-dto';
+
 export interface UpdateMatchCommand {
     id: number;
     playerOneFullName: string;
     playerTwoFullName: string;
-    playerOnePoints: number[];
-    playerTwoPoints: number[];
+    results: Result[];
 }
