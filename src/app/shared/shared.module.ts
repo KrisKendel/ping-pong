@@ -7,6 +7,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     imports: [],
@@ -18,7 +21,12 @@ import { MatPaginatorModule } from '@angular/material/paginator';
         MatSidenavModule,
         MatTableModule,
         MatIconModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        MatCardModule,
+        MatDialogModule,
+        MatSnackBarModule,
+        FormsModule,
+        ReactiveFormsModule
     ]
 })
 

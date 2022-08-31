@@ -3,3 +3,11 @@
         <mat-icon>keyboard_arrow_left</mat-icon>
     </button>
 </div>
+
+<div *ngIf="(player$ | async) as player" class="main-div">
+    <mat-card class="card">
+        <div class="info">
+            <h1 class="name">{{ player.firstName }} {{ player.lastName }}</h1>
+        </div>
+    </mat-card>
+</div>

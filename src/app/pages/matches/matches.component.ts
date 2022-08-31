@@ -37,11 +37,11 @@ export class MatchesComponent implements OnInit {
       )
   }
 
-  onCreateMatchClick(event: Event) { }
+  onCreateMatchClick(event: Event): void { }
 
-  onEditMatchClick(event: Event, matchId: number) { }
+  onEditMatchClick(event: Event, matchId: number): void { }
 
-  onDeleteMatchClick(event: Event, matchId: number) { }
+  onDeleteMatchClick(event: Event, matchId: number): void { }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

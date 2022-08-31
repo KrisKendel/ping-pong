@@ -1,10 +1,16 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { map, Observable, shareReplay } from 'rxjs';
+import { Router } from '@angular/router';
+import { map, Observable, shareReplay, tap } from 'rxjs';
 import { PlayerDTO } from 'src/app/core/entity/response/player/player-dto';
 import { PlayerService } from 'src/app/core/services/player.service';
+import { playerCreate, playerUpdate } from 'src/app/core/services/rest';
+import { SnackBarService } from 'src/app/core/services/snackbar.service';
+import { WarningDialogComponent } from 'src/app/shared/dialog-components/warning-dialog/warning-dialog.component';
+import { WarningType } from 'src/app/shared/models/warning-type';
 
 @Component({
   selector: 'app-players',
@@ -12,13 +18,18 @@ import { PlayerService } from 'src/app/core/services/player.service';
   styleUrls: ['./players.component.scss']
 })
 export class PlayersComponent implements OnInit {
-  players$: Observable<any> = new Observable<any>()
+  players$: Observable<any>;
   displayedColumns: string[] = ['name', 'actions'];
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private playerService: PlayerService) { }
+  constructor(
+    private playerService: PlayerService,
+    private dialog: MatDialog,
+    private snackBarService: SnackBarService,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
     this.getAllPlayers();
@@ -28,7 +39,7 @@ export class PlayersComponent implements OnInit {
     this.players$ = this.playerService.getAllPlayers()
       .pipe(
         shareReplay(),
-        map((players: PlayerDTO[]) => {
+        map((players: any) => {
           let dataSource = new MatTableDataSource<PlayerDTO>(players);
           dataSource.paginator = this.paginator;
           dataSource.sort = this.sort;
@@ -37,17 +48,40 @@ export class PlayersComponent implements OnInit {
       )
   }
 
-  onCreatePlayerClick(event: Event) { }
+  onCreatePlayerClick(event: Event): void {
+    event.stopPropagation();
+    this.router.navigate([playerCreate]);
+  }
 
-  onEditPlayerClick(event: Event, playerId: number) { }
+  onEditPlayerClick(event: Event, playerId: number): void {
+    event.stopPropagation();
+    this.router.navigate([playerUpdate, playerId])
+  }
 
-  onDeletePlayerClick(event: Event, playerId: number) { }
+  onDeletePlayerClick(event: Event, playerId: number): void {
+    event.stopPropagation();
+    const deletePlayerDialog = this.dialog.open(WarningDialogComponent, { data: { type: WarningType.DELETE_PLAYER } });
+
+    deletePlayerDialog.afterClosed().subscribe((res) => {
+      if (res) {
+        this.playerService.deletePlayer(playerId).subscribe({
+          next: (() => {
+            this.snackBarService.createSnackBar('Player successfully deleted!');
+            this.getAllPlayers();
+          }),
+          error: (() => {
+            this.snackBarService.createSnackBar('Deletion failed!');
+          })
+        })
+      }
+    })
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
 
-    this.players$ = this.players$.pipe(map((players) => {
-      let dataSource = new MatTableDataSource<PlayerDTO>(players);
+    this.players$ = this.players$.pipe(tap((playersTableData) => {
+      let dataSource = playersTableData
       dataSource.paginator = this.paginator;
       dataSource.filter = filterValue.trim().toLowerCase();
       return dataSource;

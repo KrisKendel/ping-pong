@@ -18,6 +18,10 @@
 .table-container {
   margin: 20px;
 
+  .input-size {
+    font-size: 16px;
+  }
+
   table {
     width: 100%;
 
@@ -33,5 +37,46 @@
       width: 130px;
       padding-right: 0;
     }
+  }
+}
+
+.main-div {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+mat-card {
+  padding: 0 0 20px 0;
+  .header {
+    background: $color-primary;
+  }
+
+  .info {
+    margin-top: 50px;
+
+    h1 {
+      font-size: 30px;
+      margin: 20px;
+    }
+
+    h2 {
+      margin: 0;
+    }
+  }
+}
+
+.green-snackbar {
+  background: green;
+}
+
+.red-snackbar {
+  background: red;
+}
+
+form {
+  padding: 20px;
+  mat-form-field {
+    margin: 5px;
   }
 }
