@@ -6,10 +6,16 @@
 </div>
 
 <div class="table-container">
-    <table mat-table matSort [dataSource]="players$ | async" class="mat-elevation-z8">
+    <table mat-table matSort matSortActive="setsWon" matSortDirection="desc" [dataSource]="players$ | async"
+        class="mat-elevation-z8">
         <ng-container matColumnDef="name">
             <th mat-header-cell mat-sort-header *matHeaderCellDef>Name</th>
             <td class="name-cell" mat-cell *matCellDef="let player">{{ player.firstName + ' ' + player.lastName }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="setsWon">
+            <th mat-header-cell mat-sort-header matSortDirection="desc" *matHeaderCellDef>Sets won</th>
+            <td class="name-cell" mat-cell *matCellDef="let player">{{ player.setsWon }}</td>
         </ng-container>
 
         <ng-container matColumnDef="actions">

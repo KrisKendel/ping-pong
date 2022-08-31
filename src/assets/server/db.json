@@ -3,56 +3,67 @@
     {
       "firstName": "Pavao2",
       "lastName": "Perić2",
+      "setsWon": 0,
       "id": 1
     },
     {
       "firstName": "Pavao2",
       "lastName": "Perić32",
+      "setsWon": 1,
       "id": 2
     },
     {
       "id": 3,
       "firstName": "Pavao3",
-      "lastName": "Perić"
+      "lastName": "Perić",
+      "setsWon": 13
     },
     {
       "id": 4,
       "firstName": "Pavao4",
-      "lastName": "Perić"
+      "lastName": "Perić",
+      "setsWon": 33
     },
     {
       "firstName": "test123",
       "lastName": "teasa12",
+      "setsWon": 21,
       "id": 5
     },
     {
       "firstName": "tes",
       "lastName": "sadasd",
+      "setsWon": 6,
       "id": 6
     },
     {
       "firstName": "asdasdsa",
       "lastName": "asdasdsa",
+      "setsWon": 11,
       "id": 7
     },
     {
       "firstName": "grtegtrg",
       "lastName": "rtgtrg",
+      "setsWon": 7,
       "id": 8
     },
     {
       "firstName": "sdfdsf",
       "lastName": "sdfsdfd",
+      "setsWon": 2,
       "id": 9
     },
     {
       "firstName": "asdsad",
       "lastName": "asdasd",
+      "setsWon": 23,
       "id": 10
     },
     {
       "firstName": "asdasd",
       "lastName": "asdasdsa",
+      "setsWon": 23,
       "id": 11
     }
   ],

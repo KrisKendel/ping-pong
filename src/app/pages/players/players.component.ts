@@ -19,7 +19,7 @@ import { WarningType } from 'src/app/shared/models/warning-type';
 })
 export class PlayersComponent implements OnInit {
   players$: Observable<any>;
-  displayedColumns: string[] = ['name', 'actions'];
+  displayedColumns: string[] = ['name', 'setsWon', 'actions'];
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

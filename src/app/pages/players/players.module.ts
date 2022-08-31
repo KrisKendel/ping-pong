@@ -9,10 +9,6 @@ import { AddEditPlayerComponent } from './add-edit-player/add-edit-player.compon
 
 @NgModule({
     declarations: [PlayersComponent, ViewPlayerComponent, AddEditPlayerComponent],
-    imports: [
-        CommonModule,
-        PlayersRoutingModule,
-        SharedModule
-    ]
+    imports: [CommonModule, PlayersRoutingModule, SharedModule]
 })
 export class PlayersModule { }
