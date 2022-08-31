@@ -11,6 +11,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSortModule } from '@angular/material/sort';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
     imports: [],
@@ -28,7 +29,8 @@ import { MatSortModule } from '@angular/material/sort';
         MatSnackBarModule,
         FormsModule,
         ReactiveFormsModule,
-        MatSortModule
+        MatSortModule,
+        MatSelectModule
     ]
 })
 

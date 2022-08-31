@@ -7,10 +7,27 @@
 
 <div class="table-container">
     <table mat-table matSort [dataSource]="matches$ | async" class="mat-elevation-z8">
-        <ng-container matColumnDef="name">
-            <th mat-header-cell mat-sort-header *matHeaderCellDef>Name</th>
-            <td class="name-cell" mat-cell *matCellDef="let match">{{ match.name }}</td>
+        <ng-container matColumnDef="playerOneFullName">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Player One</th>
+            <td class="name-cell" mat-cell *matCellDef="let match">{{ match.playerOneFullName }}</td>
         </ng-container>
+
+        <ng-container matColumnDef="playerTwoFullName">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Player Two</th>
+            <td class="name-cell" mat-cell *matCellDef="let match">{{ match.playerTwoFullName }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="playerOnePoints">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Player One Points</th>
+            <td class="name-cell" mat-cell *matCellDef="let match">{{ match.playerOnePoints }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="playerTwoPoints">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Player Two Points</th>
+            <td class="name-cell" mat-cell *matCellDef="let match">{{ match.playerTwoPoints }}</td>
+        </ng-container>
+
+
 
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef>
@@ -30,7 +47,7 @@
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr class="table-row" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr class="table-row" mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="row.id"></tr>
         <tr class="mat-row" *matNoDataRow>
             <td class="mat-cell" colspan="4">No data found</td>
         </tr>

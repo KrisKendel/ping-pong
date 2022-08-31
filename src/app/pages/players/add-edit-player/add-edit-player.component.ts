@@ -40,15 +40,17 @@ export class AddEditPlayerComponent implements OnInit {
 
   generateAddForm(): void {
     this.playerForm = this.formBuilder.group({
-      firstName: this.formBuilder.control('', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]),
-      lastName: this.formBuilder.control('', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]),
+      firstName: this.formBuilder.control('', [Validators.required, Validators.pattern('^[a-zA-Z_ /ČčĆćŠšĐđ/i]*$')]),
+      lastName: this.formBuilder.control('', [Validators.required, Validators.pattern('^[a-zA-Z_ /ČčĆćŠšĐđ/i]*$')]),
+      setsWon: this.formBuilder.control('', Validators.required)
     })
   }
 
   generateEditForm(player: PlayerDTO): void {
     this.playerForm = this.formBuilder.group({
-      firstName: this.formBuilder.control(player.firstName, [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]),
-      lastName: this.formBuilder.control(player.lastName, [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]),
+      firstName: this.formBuilder.control(player.firstName, [Validators.required, Validators.pattern('^[a-zA-Z_ /ČčĆćŠšĐđ/i]*$')]),
+      lastName: this.formBuilder.control(player.lastName, [Validators.required, Validators.pattern('^[a-zA-Z_ /ČčĆćŠšĐđ/i]*$')]),
+      setsWon: this.formBuilder.control(player.setsWon, Validators.required)
     })
   }
 

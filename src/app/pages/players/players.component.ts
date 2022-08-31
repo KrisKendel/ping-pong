@@ -55,7 +55,7 @@ export class PlayersComponent implements OnInit {
 
   onEditPlayerClick(event: Event, playerId: number): void {
     event.stopPropagation();
-    this.router.navigate([playerUpdate, playerId])
+    this.router.navigate([playerUpdate, playerId]);
   }
 
   onDeletePlayerClick(event: Event, playerId: number): void {
@@ -66,7 +66,7 @@ export class PlayersComponent implements OnInit {
       if (res) {
         this.playerService.deletePlayer(playerId).subscribe({
           next: (() => {
-            this.snackBarService.createSnackBar('Player successfully deleted!');
+            this.snackBarService.createSnackBar('Player deleted!');
             this.getAllPlayers();
           }),
           error: (() => {

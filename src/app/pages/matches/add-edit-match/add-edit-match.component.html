@@ -1,1 +1,50 @@
-<p>add-edit-match works!</p>
+<div class="nav">
+    <button class="back-button" mat-raised-button routerLink="/matches">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+    <h1 *ngIf="matchId" class="title">Edit Match</h1>
+    <h1 *ngIf="!matchId" class="title">Create Match</h1>
+</div>
+
+<div class="card" *ngIf="!loading">
+    <form [formGroup]="matchForm" #formDirective="ngForm" (ngSubmit)="onSubmit(formDirective)">
+        <mat-form-field appearance="outline" class="w-50">
+            <mat-label>Player One</mat-label>
+            <mat-select formControlName="playerOneFullName" (selectionChange)="onPlayerOneSelect($event)">
+                <mat-option *ngFor="let player of (players$ | async)"
+                    [value]="player.firstName + ' ' + player.lastName">
+                    {{ player.firstName }} {{ player.lastName }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-50">
+            <mat-label>Player Two</mat-label>
+            <mat-select formControlName="playerTwoFullName">
+                <mat-option *ngFor="let player of (players$ | async)"
+                    [value]="player.firstName + ' ' + player.lastName">
+                    {{ player.firstName }} {{ player.lastName }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-50">
+            <mat-label>Player One Points</mat-label>
+            <input matInput type="text" formControlName="playerOnePoints">
+            <mat-error>
+                Please enter player one points
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-50">
+            <mat-label>Player Two Points</mat-label>
+            <input matInput type="text" formControlName="playerTwoPoints">
+            <mat-error>
+                Please enter player two points
+            </mat-error>
+        </mat-form-field>
+        <button *ngIf="matchId" mat-raised-button color="primary" [disabled]="!matchForm.dirty" type="submit">
+            UPDATE
+        </button>
+        <button *ngIf="!matchId" mat-raised-button color="primary" [disabled]="!matchForm.valid" type="submit">
+            CREATE
+        </button>
+    </form>
+</div>

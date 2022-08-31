@@ -1,1 +1,15 @@
-<p>view-match works!</p>
+<div class="nav">
+    <button class="back-button" mat-raised-button routerLink="/matches">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+</div>
+
+<div *ngIf="(match$ | async) as match" class="main-div">
+    <mat-card class="card">
+        <div class="info">
+            <h1 class="name">{{ match.playerOneFullName }} - {{ match.playerTwoFullName }}</h1>
+            <h1 class="name">{{ match.playerOnePoints }}</h1>
+            <h1 class="name">{{ match.playerTwoPoints }}</h1>
+        </div>
+    </mat-card>
+</div>

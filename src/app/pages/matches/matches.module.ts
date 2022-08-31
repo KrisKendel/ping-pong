@@ -10,10 +10,6 @@ import { AddEditMatchComponent } from './add-edit-match/add-edit-match.component
 
 @NgModule({
   declarations: [MatchesComponent, ViewMatchComponent, AddEditMatchComponent],
-  imports: [
-    CommonModule,
-    MatchesRoutingModule,
-    SharedModule
-  ]
+  imports: [CommonModule, MatchesRoutingModule, SharedModule]
 })
 export class MatchesModule { }

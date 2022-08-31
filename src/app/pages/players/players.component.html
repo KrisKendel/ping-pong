@@ -36,7 +36,7 @@
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr class="table-row" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr class="table-row" mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="row.id"></tr>
         <tr class="mat-row" *matNoDataRow>
             <td class="mat-cell" colspan="4">No data found</td>
         </tr>
