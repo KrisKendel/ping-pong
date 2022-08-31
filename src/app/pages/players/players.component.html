@@ -1,0 +1,40 @@
+<div class="nav">
+    <h1 class="title">Players</h1>
+    <button class="create-button" mat-raised-button color="primary" (click)="onCreatePlayerClick($event)">
+        Add Player
+    </button>
+</div>
+
+<div class="table-container">
+    <table mat-table matSort [dataSource]="players$ | async" class="mat-elevation-z8">
+        <ng-container matColumnDef="name">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Name</th>
+            <td class="name-cell" mat-cell *matCellDef="let player">{{ player.firstName + ' ' + player.lastName }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>
+                <mat-form-field class="search-form-field">
+                    <mat-label>Search</mat-label>
+                    <input class="input-size" matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+                </mat-form-field>
+            </th>
+            <td class="action-cell" mat-cell *matCellDef="let player">
+                <button mat-button (click)="onEditPlayerClick($event, player.id)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-button (click)="onDeletePlayerClick($event, player.id)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr class="table-row" mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="row.id"></tr>
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No data found</td>
+        </tr>
+    </table>
+    <mat-paginator pageSize="10" hidePageSize="true">
+    </mat-paginator>
+</div>
