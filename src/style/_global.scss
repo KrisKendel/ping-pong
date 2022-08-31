@@ -1,0 +1,37 @@
+@import "./variables";
+
+.nav {
+  display: flex;
+}
+
+.back-button,
+.title {
+  margin: 20px 0 0 20px;
+}
+
+.create-button {
+  right: 0;
+  position: absolute;
+  margin: 20px 20px 0 0;
+}
+
+.table-container {
+  margin: 20px;
+
+  table {
+    width: 100%;
+
+    .table-row {
+      cursor: pointer;
+    }
+
+    .mat-row:hover {
+      background-color: $color-light-grey-hover;
+    }
+
+    .action-cell {
+      width: 130px;
+      padding-right: 0;
+    }
+  }
+}

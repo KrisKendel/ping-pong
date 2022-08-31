@@ -1,0 +1,40 @@
+<div class="nav">
+    <h1 class="title">Matches</h1>
+    <button class="create-button" mat-raised-button color="primary" (click)="onCreateMatchClick($event)">
+        Add Match
+    </button>
+</div>
+
+<div class="table-container">
+    <table mat-table matSort [dataSource]="matches$ | async" class="mat-elevation-z8">
+        <ng-container matColumnDef="name">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Name</th>
+            <td class="name-cell" mat-cell *matCellDef="let match">{{ match.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>
+                <mat-form-field class="search-form-field">
+                    <mat-label>Search</mat-label>
+                    <input class="input-size" matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+                </mat-form-field>
+            </th>
+            <td class="action-cell" mat-cell *matCellDef="let match">
+                <button mat-button (click)="onEditMatchClick($event, match.id)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-button (click)="onDeleteMatchClick($event, match.id)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr class="table-row" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No data found</td>
+        </tr>
+    </table>
+    <mat-paginator pageSize="10" hidePageSize="true">
+    </mat-paginator>
+</div>

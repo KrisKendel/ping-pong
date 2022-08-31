@@ -1,0 +1,14 @@
+<app-header></app-header>
+<mat-drawer-container class="drawer-container" autosize="true">
+    <mat-drawer mode="side" opened>
+        <div class="buttons-container">
+            <button mat-button routerLink="players" color="primary" routerLinkActive="active-list-item"
+                [routerLinkActiveOptions]="{exact: true}">Players</button>
+            <button mat-button routerLink="matches" color="primary" routerLinkActive="active-list-item"
+                [routerLinkActiveOptions]="{exact: true}">Matches</button>
+        </div>
+    </mat-drawer>
+    <mat-drawer-content>
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
+</mat-drawer-container>
