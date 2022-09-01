@@ -4,3 +4,7 @@ export interface UpdatePlayerCommand {
     lastName: string;
     setsWon: number;
 }
+
+export interface UpdatePlayerPointsCommand {
+    setsWon: number;
+}

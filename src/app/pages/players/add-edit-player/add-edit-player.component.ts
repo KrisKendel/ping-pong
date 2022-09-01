@@ -42,7 +42,7 @@ export class AddEditPlayerComponent implements OnInit {
     this.playerForm = this.formBuilder.group({
       firstName: this.formBuilder.control('', [Validators.required, Validators.pattern('^[a-zA-Z_ /ČčĆćŠšĐđ/i]*$')]),
       lastName: this.formBuilder.control('', [Validators.required, Validators.pattern('^[a-zA-Z_ /ČčĆćŠšĐđ/i]*$')]),
-      setsWon: this.formBuilder.control('', Validators.required)
+      setsWon: this.formBuilder.control('')
     })
   }
 
@@ -50,7 +50,6 @@ export class AddEditPlayerComponent implements OnInit {
     this.playerForm = this.formBuilder.group({
       firstName: this.formBuilder.control(player.firstName, [Validators.required, Validators.pattern('^[a-zA-Z_ /ČčĆćŠšĐđ/i]*$')]),
       lastName: this.formBuilder.control(player.lastName, [Validators.required, Validators.pattern('^[a-zA-Z_ /ČčĆćŠšĐđ/i]*$')]),
-      setsWon: this.formBuilder.control(player.setsWon, Validators.required)
     })
   }
 
@@ -63,6 +62,7 @@ export class AddEditPlayerComponent implements OnInit {
         })
       })
     } else {
+      this.playerForm.get('setsWon')?.patchValue(0);
       this.playerService.createPlayer(this.playerForm.value).subscribe({
         next: (() => {
           this.snackBarService.createSnackBar('Player successfully created!');

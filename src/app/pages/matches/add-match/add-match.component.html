@@ -10,50 +10,60 @@
     <form [formGroup]="matchForm" #formDirective="ngForm" (ngSubmit)="onSubmit(formDirective)">
         <mat-form-field appearance="outline" class="w-50">
             <mat-label>Player One</mat-label>
-            <mat-select formControlName="playerOneFullName" (selectionChange)="onPlayerOneSelect($event)">
-                <mat-option *ngFor="let player of (players$ | async)"
-                    [value]="player.firstName + ' ' + player.lastName">
+            <mat-select formControlName="playerOneFullName" (selectionChange)="onPlayerOneClick($event)">
+                <mat-option *ngFor="let player of (players$ | async)" [value]="player.id">
                     {{ player.firstName }} {{ player.lastName }}
                 </mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field appearance="outline" class="w-50">
             <mat-label>Player Two</mat-label>
-            <mat-select formControlName="playerTwoFullName">
-                <mat-option *ngFor="let player of (players$ | async)"
-                    [value]="player.firstName + ' ' + player.lastName">
+            <mat-select formControlName="playerTwoFullName" (selectionChange)="onPlayerTwoClick($event)">
+                <mat-option *ngFor="let player of (players$ | async)" [value]="player.id">
                     {{ player.firstName }} {{ player.lastName }}
                 </mat-option>
             </mat-select>
         </mat-form-field>
-
+        <button mat-raised-button type="button" (click)="refreshForm()">
+            <mat-icon>refresh</mat-icon>
+        </button>
         <ng-container formArrayName="results">
             <ng-container *ngFor="let result of results.controls; let i = index">
                 <div [formGroupName]="i">
-                    Set {{ i + 1 }}
                     <mat-form-field appearance="outline" class="w-50">
-                        <mat-label>Player 1 result</mat-label>
-                        <input matInput type="number" formControlName="playerOneResult">
+                        <mat-label>Player One result</mat-label>
+                        <input matInput type="number" #playerOneResult formControlName="playerOneResult">
                         <mat-error>
                             Please enter player one result
                         </mat-error>
                     </mat-form-field>
                     :
                     <mat-form-field appearance="outline" class="w-50">
-                        <mat-label>Player 2 result</mat-label>
-                        <input matInput type="number" formControlName="playerTwoResult">
+                        <mat-label>Player Two result</mat-label>
+                        <input matInput type="number" #playerTwoResult formControlName="playerTwoResult">
                         <mat-error>
                             Please enter player two result
                         </mat-error>
+
                     </mat-form-field>
+                    <button mat-raised-button [class]="'validate-button-' + i" type="button" [disabled]="buttons[i]"
+                        (click)="validateSet(playerOneResult.value, playerTwoResult.value, i)">
+                        Validate Set {{ i + 1 }}
+                    </button>
+                    <ng-container *ngIf="warnings[i]">
+                        <span class="validation-error-message">After 10:10 two-point
+                            difference wins</span>
+                    </ng-container>
                 </div>
             </ng-container>
         </ng-container>
-        <button *ngIf="matchId" mat-raised-button color="primary" [disabled]="!matchForm.dirty" type="submit">
-            UPDATE
+        <button *ngIf="matchId" mat-raised-button color="primary" [disabled]="!matchForm.dirty || !allMatchesValid"
+            type="submit">
+            Update
         </button>
-        <button *ngIf="!matchId" mat-raised-button color="primary" [disabled]="!matchForm.valid" type="submit">
-            CREATE
+        <button *ngIf="!matchId" mat-raised-button color="primary" [disabled]="!matchForm.valid|| !allMatchesValid"
+            type="submit">
+            Create
         </button>
     </form>
 </div>

@@ -38,14 +38,7 @@
                     <input class="input-size" matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
                 </mat-form-field>
             </th>
-            <td class="action-cell" mat-cell *matCellDef="let match">
-                <button mat-button (click)="onEditMatchClick($event, match.id)">
-                    <mat-icon>edit</mat-icon>
-                </button>
-                <button mat-button (click)="onDeleteMatchClick($event, match.id)">
-                    <mat-icon>delete</mat-icon>
-                </button>
-            </td>
+            <td class="action-cell" mat-cell *matCellDef="let match"></td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

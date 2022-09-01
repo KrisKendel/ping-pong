@@ -53,11 +53,6 @@ export class MatchesComponent implements OnInit {
     this.router.navigate([matchCreate]);
   }
 
-  onEditMatchClick(event: Event, matchId: number): void {
-    event.stopPropagation();
-    this.router.navigate([matchUpdate, matchId]);
-  }
-
   onDeleteMatchClick(event: Event, matchId: number): void {
     event.stopPropagation();
     const deleteMatchDialog = this.dialog.open(WarningDialogComponent, { data: { type: WarningType.DELETE_MATCH } });

@@ -22,18 +22,11 @@
                 Please enter last name
             </mat-error>
         </mat-form-field>
-        <mat-form-field appearance="outline" class="w-50">
-            <mat-label>Sets won</mat-label>
-            <input matInput type="number" formControlName="setsWon">
-            <mat-error>
-                Please enter sets won
-            </mat-error>
-        </mat-form-field>
         <button *ngIf="playerId" mat-raised-button color="primary" [disabled]="!playerForm.dirty" type="submit">
-            UPDATE
+            Update
         </button>
         <button *ngIf="!playerId" mat-raised-button color="primary" [disabled]="!playerForm.valid" type="submit">
-            CREATE
+            Create
         </button>
     </form>
 </div>
