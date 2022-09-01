@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { map, Observable, shareReplay } from 'rxjs';
 import { MatchDTO } from 'src/app/core/entity/response/match/match-dto';
 import { MatchService } from 'src/app/core/services/match.service';
-import { matchCreate, matchUpdate } from 'src/app/core/services/rest';
+import { matchCreate } from 'src/app/core/services/rest';
 import { SnackBarService } from 'src/app/core/services/snackbar.service';
 import { WarningDialogComponent } from 'src/app/shared/dialog-components/warning-dialog/warning-dialog.component';
 import { WarningType } from 'src/app/shared/models/warning-type';
@@ -19,7 +19,7 @@ import { WarningType } from 'src/app/shared/models/warning-type';
 })
 export class MatchesComponent implements OnInit {
   matches$: Observable<any>;
-  displayedColumns: string[] = ['playerOneFullName', 'playerTwoFullName', 'sets', 'actions'];
+  displayedColumns: string[] = ['playerOne', 'playerTwo', 'sets', 'actions'];
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

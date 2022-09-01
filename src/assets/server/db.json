@@ -1,105 +1,17 @@
 {
   "players": [
     {
-      "firstName": "Zoran",
-      "lastName": "Primorac",
-      "setsWon": 19,
-      "id": 4
-    },
-    {
-      "firstName": "Tamara",
-      "lastName": "Boroš",
-      "setsWon": 14,
-      "id": 5
-    },
-    {
-      "firstName": "Kiki",
-      "lastName": "Riki",
-      "setsWon": 2,
-      "id": 7
-    }
-  ],
-  "matches": [
-    {
-      "playerOneFullName": "Kiki Riki",
-      "playerTwoFullName": "Tamara Boroš",
-      "results": [
-        {
-          "playerOneResult": 11,
-          "playerTwoResult": 2
-        },
-        {
-          "playerOneResult": 11,
-          "playerTwoResult": 5
-        },
-        {
-          "playerOneResult": 5,
-          "playerTwoResult": 11
-        },
-        {
-          "playerOneResult": 1,
-          "playerTwoResult": 11
-        },
-        {
-          "playerOneResult": 13,
-          "playerTwoResult": 15
-        }
-      ],
+      "firstName": "Marko",
+      "lastName": "Markic",
+      "setsWon": 0,
       "id": 1
     },
     {
-      "playerOneFullName": "Zoran Primorac",
-      "playerTwoFullName": "Tamara Boroš",
-      "results": [
-        {
-          "playerOneResult": 11,
-          "playerTwoResult": 2
-        },
-        {
-          "playerOneResult": 11,
-          "playerTwoResult": 2
-        },
-        {
-          "playerOneResult": 11,
-          "playerTwoResult": 2
-        },
-        {
-          "playerOneResult": 11,
-          "playerTwoResult": 2
-        },
-        {
-          "playerOneResult": 2,
-          "playerTwoResult": 11
-        }
-      ],
+      "firstName": "Pero",
+      "lastName": "Peric",
+      "setsWon": 0,
       "id": 2
-    },
-    {
-      "playerOneFullName": "Zoran Primorac",
-      "playerTwoFullName": "Tamara Boroš",
-      "results": [
-        {
-          "playerOneResult": 11,
-          "playerTwoResult": 2
-        },
-        {
-          "playerOneResult": 11,
-          "playerTwoResult": 2
-        },
-        {
-          "playerOneResult": 4,
-          "playerTwoResult": 11
-        },
-        {
-          "playerOneResult": 11,
-          "playerTwoResult": 5
-        },
-        {
-          "playerOneResult": 11,
-          "playerTwoResult": 5
-        }
-      ],
-      "id": 3
     }
-  ]
+  ],
+  "matches": []
 }

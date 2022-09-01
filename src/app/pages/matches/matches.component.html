@@ -7,14 +7,16 @@
 
 <div class="table-container">
     <table mat-table matSort [dataSource]="matches$ | async" class="mat-elevation-z8">
-        <ng-container matColumnDef="playerOneFullName">
+        <ng-container matColumnDef="playerOne">
             <th mat-header-cell mat-sort-header *matHeaderCellDef>Player One</th>
-            <td class="name-cell" mat-cell *matCellDef="let match">{{ match.playerOneFullName }}</td>
+            <td class="name-cell" mat-cell *matCellDef="let match">{{ match.playerOne.firstName }} {{
+                match.playerOne.lastName}}</td>
         </ng-container>
 
-        <ng-container matColumnDef="playerTwoFullName">
+        <ng-container matColumnDef="playerTwo">
             <th mat-header-cell mat-sort-header *matHeaderCellDef>Player Two</th>
-            <td class="name-cell" mat-cell *matCellDef="let match">{{ match.playerTwoFullName }}</td>
+            <td class="name-cell" mat-cell *matCellDef="let match">{{ match.playerTwo.firstName }} {{
+                match.playerTwo.lastName}}</td>
         </ng-container>
 
         <ng-container matColumnDef="sets">
@@ -38,7 +40,11 @@
                     <input class="input-size" matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
                 </mat-form-field>
             </th>
-            <td class="action-cell" mat-cell *matCellDef="let match"></td>
+            <td class="action-cell" mat-cell *matCellDef="let match">
+                <button mat-button (click)="onDeleteMatchClick($event, match.id)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

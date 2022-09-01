@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { combineLatest, filter, forkJoin, map, Observable, scan, shareReplay, tap, withLatestFrom } from 'rxjs';
+import { Router } from '@angular/router';
+import { combineLatest, forkJoin, map, Observable, shareReplay, startWith, tap, withLatestFrom } from 'rxjs';
 import { MatchDTO } from 'src/app/core/entity/response/match/match-dto';
 import { PlayerDTO } from 'src/app/core/entity/response/player/player-dto';
 import { MatchService } from 'src/app/core/services/match.service';
@@ -32,7 +32,6 @@ export class AddMatchComponent implements OnInit {
   allMatchesValid = false;
 
   constructor(
-    private route: ActivatedRoute,
     private snackBarService: SnackBarService,
     private formBuilder: FormBuilder,
     private matchService: MatchService,
@@ -42,18 +41,26 @@ export class AddMatchComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPlayers();
+    this.generateAddForm();
+    this.loading = false;
 
-    this.matchId = this.route.snapshot.params['id'];
-    if (this.matchId) {
-      this.matchService.getMatchById(this.matchId).subscribe((match) => {
-        this.match = match;
-        this.generateEditForm(this.match);
-        this.loading = false;
-      })
-    } else {
-      this.generateAddForm();
-      this.loading = false;
-    }
+    this.firstPlayerSelect$ = combineLatest([
+      this.matchForm.get('playerTwo').valueChanges.pipe(startWith(null)),
+      this.players$
+    ]).pipe(
+      map(([playerTwo, players]) =>
+        players.filter((player) => player.id !== playerTwo?.id)
+      )
+    );
+
+    this.secondPlayerSelect$ = combineLatest([
+      this.matchForm.get('playerOne').valueChanges.pipe(startWith(null)),
+      this.players$
+    ]).pipe(
+      map(([playerOne, players]) =>
+        players.filter((player) => player.id !== playerOne?.id)
+      )
+    );
   }
 
   getPlayers() {
@@ -62,27 +69,11 @@ export class AddMatchComponent implements OnInit {
 
   generateAddForm(): void {
     this.matchForm = this.formBuilder.group({
-      playerOneFullName: this.formBuilder.control('', Validators.required),
-      playerTwoFullName: this.formBuilder.control('', Validators.required),
+      playerOne: this.formBuilder.control(null, Validators.required),
+      playerTwo: this.formBuilder.control(null, Validators.required),
       results: this.formBuilder.array([])
     })
     this.addResultFormGroup(0);
-  }
-
-  generateEditForm(match: MatchDTO): void {
-    this.matchForm = this.formBuilder.group({
-      playerOneFullName: this.formBuilder.control(match.playerOneFullName, Validators.required),
-      playerTwoFullName: this.formBuilder.control(match.playerTwoFullName, Validators.required),
-      results: this.formBuilder.array([])
-    })
-
-    this.match.results.forEach((element) => {
-      const result = this.formBuilder.group({
-        playerOneResult: this.formBuilder.control(element.playerOneResult, Validators.required),
-        playerTwoResult: this.formBuilder.control(element.playerTwoResult, Validators.required)
-      })
-      this.results.push(result);
-    })
   }
 
   get results() {
@@ -140,28 +131,6 @@ export class AddMatchComponent implements OnInit {
     return null
   }
 
-  onPlayerOneClick(event: any) {
-    this.players$ = this.players$.pipe(
-      map((allPlayers) => allPlayers.filter((f: PlayerDTO) => f.id !== event.value)))
-      // this.playerService.getPlayerById(playerId).subscribe(
-      //   (res) => {
-      //     this.playerOne = res;
-      //   }
-      // );
-      .pipe(tap((res) => { console.log(res, 'res') }))
-  }
-
-  onPlayerTwoClick(event: any) {
-    this.players$ = this.players$.pipe(
-      map((allPlayers) => allPlayers.filter((f: PlayerDTO) => f.id !== event.value)))
-
-    // this.playerService.getPlayerById(playerId).subscribe(
-    //   (res) => {
-    //     this.playerTwo = res;
-    //   }
-    // );
-  }
-
   disableButton(i: number) {
     this.buttons[i] = true;
     this.warnings[i] = false;
@@ -174,36 +143,23 @@ export class AddMatchComponent implements OnInit {
   }
 
   onSubmit(formDirective: FormGroupDirective): void {
-    if (this.matchId) {
-      this.matchService.updateMatch(this.matchForm.value, this.matchId).subscribe({
+    forkJoin(
+      [
+        this.matchService.createMatch(this.matchForm.value),
+        this.playerService.updatePlayerPoints({ setsWon: this.matchForm.get('playerOne').value.setsWon + this.playerOnePoints }, this.matchForm.get('playerOne').value.id),
+        this.playerService.updatePlayerPoints({ setsWon: this.matchForm.get('playerTwo').value.setsWon + this.playerTwoPoints }, this.matchForm.get('playerTwo').value.id),
+      ])
+      .subscribe({
         next: (() => {
-          this.snackBarService.createSnackBar('Match successfully updated!');
-          this.router.navigate(['/matches']);
+          this.snackBarService.createSnackBar('Match successfully created!');
+          formDirective.resetForm();
+          this.refreshForm();
         }),
         error: (() => {
-          this.snackBarService.createSnackBar('Error while updating match!');
+          this.snackBarService.createSnackBar('Error while creating match!');
         })
       })
-    } else {
-      this.matchForm.get('playerOneFullName')?.patchValue(this.playerOne.firstName + ' ' + this.playerOne.lastName);
-      this.matchForm.get('playerTwoFullName')?.patchValue(this.playerTwo.firstName + ' ' + this.playerTwo.lastName);
-      forkJoin(
-        [
-          this.matchService.createMatch(this.matchForm.value),
-          this.playerService.updatePlayerPoints({ setsWon: this.playerOne.setsWon + this.playerOnePoints }, this.playerOne.id),
-          this.playerService.updatePlayerPoints({ setsWon: this.playerTwo.setsWon + this.playerTwoPoints }, this.playerTwo.id),
-        ])
-        .subscribe({
-          next: (() => {
-            this.snackBarService.createSnackBar('Match successfully created!');
-            formDirective.resetForm();
-            this.refreshForm();
-          }),
-          error: (() => {
-            this.snackBarService.createSnackBar('Error while creating match!');
-          })
-        })
-    }
+
   }
 
   refreshForm() {

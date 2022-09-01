@@ -10,16 +10,16 @@
     <form [formGroup]="matchForm" #formDirective="ngForm" (ngSubmit)="onSubmit(formDirective)">
         <mat-form-field appearance="outline" class="w-50">
             <mat-label>Player One</mat-label>
-            <mat-select formControlName="playerOneFullName" (selectionChange)="onPlayerOneClick($event)">
-                <mat-option *ngFor="let player of (players$ | async)" [value]="player.id">
+            <mat-select formControlName="playerOne">
+                <mat-option *ngFor="let player of (firstPlayerSelect$ | async)" [value]="player">
                     {{ player.firstName }} {{ player.lastName }}
                 </mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field appearance="outline" class="w-50">
             <mat-label>Player Two</mat-label>
-            <mat-select formControlName="playerTwoFullName" (selectionChange)="onPlayerTwoClick($event)">
-                <mat-option *ngFor="let player of (players$ | async)" [value]="player.id">
+            <mat-select formControlName="playerTwo">
+                <mat-option *ngFor="let player of (secondPlayerSelect$ | async)" [value]="player">
                     {{ player.firstName }} {{ player.lastName }}
                 </mat-option>
             </mat-select>

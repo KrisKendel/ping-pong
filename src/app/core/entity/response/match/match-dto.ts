@@ -1,3 +1,5 @@
+import { PlayerDTO } from '../player/player-dto';
+
 export interface Result {
     playerOneResult: number;
     playerTwoResult: number;
@@ -5,7 +7,7 @@ export interface Result {
 
 export interface MatchDTO {
     id: number;
-    playerOneFullName: string;
-    playerTwoFullName: string;
+    playerOne: PlayerDTO;
+    playerTwo: PlayerDTO;
     results: Result[]
 }

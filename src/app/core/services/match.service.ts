@@ -28,10 +28,6 @@ export class MatchService {
         return this.http.post<MatchDTO>(`${this.url}`, createData);
     }
 
-    updateMatch(updateData: UpdateMatchCommand, matchId: number): Observable<MatchDTO> {
-        return this.http.put<MatchDTO>(`${this.url}/${matchId}`, updateData);
-    }
-
     deleteMatch(matchId: number): Observable<boolean> {
         return this.http.delete<boolean>(`${this.url}/${matchId}`);
     }

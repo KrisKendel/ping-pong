@@ -7,7 +7,9 @@
 <div *ngIf="(match$ | async) as match" class="main-div">
     <mat-card class="card">
         <div class="info">
-            <h1 class="name">{{ match.playerOneFullName }} - {{ match.playerTwoFullName }}</h1>
+            <h1 class="name">{{ match.playerOne.firstName }} {{ match.playerOne.lastName}} -
+                {{ match.playerTwo.firstName }} {{ match.playerTwo.lastName }}
+            </h1>
             <div class="result" *ngFor="let result of match.results">
                 <span *ngIf="result.playerOneResult > result.playerTwoResult">
                     [<strong>{{ result.playerOneResult }}</strong> : {{ result.playerTwoResult }}]
