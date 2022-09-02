@@ -2,8 +2,7 @@
     <button class="back-button" mat-raised-button routerLink="/matches">
         <mat-icon>keyboard_arrow_left</mat-icon>
     </button>
-    <h1 *ngIf="matchId" class="title">Edit Match</h1>
-    <h1 *ngIf="!matchId" class="title">Create Match</h1>
+    <h1 class="title">Create Match</h1>
 </div>
 
 <div class="card" *ngIf="!loading">
@@ -57,12 +56,7 @@
                 </div>
             </ng-container>
         </ng-container>
-        <button *ngIf="matchId" mat-raised-button color="primary" [disabled]="!matchForm.dirty || !allMatchesValid"
-            type="submit">
-            Update
-        </button>
-        <button *ngIf="!matchId" mat-raised-button color="primary" [disabled]="!matchForm.valid|| !allMatchesValid"
-            type="submit">
+        <button mat-raised-button color="primary" [disabled]="!matchForm.valid|| !allMatchesValid" type="submit">
             Create
         </button>
     </form>

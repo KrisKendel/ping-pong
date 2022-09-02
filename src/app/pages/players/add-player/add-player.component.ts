@@ -10,7 +10,6 @@ import { SnackBarService } from 'src/app/core/services/snackbar.service';
   styleUrls: ['./add-player.component.scss']
 })
 export class AddPlayerComponent implements OnInit {
-  playerId: number;
   playerForm: FormGroup;
   player: PlayerDTO;
   loading = true;

@@ -14,7 +14,6 @@ import { Players } from 'src/app/shared/models/players';
   styleUrls: ['./add-match.component.scss']
 })
 export class AddMatchComponent implements OnInit {
-  matchId: number;
   matchForm: FormGroup;
   match: MatchDTO;
   loading = true;

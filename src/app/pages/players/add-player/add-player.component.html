@@ -2,8 +2,7 @@
     <button class="back-button" mat-raised-button routerLink="/players">
         <mat-icon>keyboard_arrow_left</mat-icon>
     </button>
-    <h1 *ngIf="playerId" class="title">Edit Player</h1>
-    <h1 *ngIf="!playerId" class="title">Create Player</h1>
+    <h1 class="title">Create Player</h1>
 </div>
 
 <div class="card" *ngIf="!loading">
@@ -22,10 +21,7 @@
                 Please enter last name
             </mat-error>
         </mat-form-field>
-        <button *ngIf="playerId" mat-raised-button color="primary" [disabled]="!playerForm.dirty" type="submit">
-            Update
-        </button>
-        <button *ngIf="!playerId" mat-raised-button color="primary" [disabled]="!playerForm.valid" type="submit">
+        <button mat-raised-button color="primary" [disabled]="!playerForm.valid" type="submit">
             Create
         </button>
     </form>
