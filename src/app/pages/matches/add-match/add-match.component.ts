@@ -104,6 +104,7 @@ export class AddMatchComponent implements OnInit {
       this.throwWarning(i);
     }
 
+    // If there is someone with 3 wins (3 : 1) match is over
     if (this.playerOnePoints === 3) {
       this.allMatchesValid = true;
       this.deleteResultFormGroup(i + 1);
@@ -151,6 +152,7 @@ export class AddMatchComponent implements OnInit {
     this.warnings[i] = true;
   }
 
+  // Creating match and updating player points
   onSubmit(formDirective: FormGroupDirective): void {
     forkJoin(
       [
