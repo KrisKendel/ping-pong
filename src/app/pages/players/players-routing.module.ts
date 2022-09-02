@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AddEditPlayerComponent } from './add-edit-player/add-edit-player.component';
+import { AddPlayerComponent } from './add-player/add-player.component';
 import { PlayersComponent } from './players.component';
 import { ViewPlayerComponent } from './view-player/view-player.component';
 
@@ -15,12 +15,8 @@ const routes: Routes = [
     },
     {
         path: 'create/new',
-        component: AddEditPlayerComponent,
-    },
-    {
-        path: 'update/:id',
-        component: AddEditPlayerComponent,
-    },
+        component: AddPlayerComponent,
+    }
 ];
 
 @NgModule({

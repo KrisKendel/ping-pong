@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { CreatePlayerCommand } from '../entity/request/player/create-player-command';
-import { UpdatePlayerCommand, UpdatePlayerPointsCommand } from '../entity/request/player/update-player-command';
+import { UpdatePlayerPointsCommand } from '../entity/request/player/update-player-points-command';
 import { PlayerDTO } from '../entity/response/player/player-dto';
 import { players } from './rest';
 
@@ -26,10 +26,6 @@ export class PlayerService {
 
     createPlayer(createData: CreatePlayerCommand): Observable<PlayerDTO> {
         return this.http.post<PlayerDTO>(`${this.url}`, createData);
-    }
-
-    updatePlayer(updateData: UpdatePlayerCommand, playerId: number): Observable<PlayerDTO> {
-        return this.http.put<PlayerDTO>(`${this.url}/${playerId}`, updateData);
     }
 
     updatePlayerPoints(updateData: UpdatePlayerPointsCommand, playerId: number): Observable<PlayerDTO> {

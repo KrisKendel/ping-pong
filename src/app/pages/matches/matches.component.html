@@ -34,12 +34,7 @@
         </ng-container>
 
         <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef>
-                <mat-form-field class="search-form-field">
-                    <mat-label>Search</mat-label>
-                    <input class="input-size" matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
-                </mat-form-field>
-            </th>
+            <th mat-header-cell *matHeaderCellDef></th>
             <td class="action-cell" mat-cell *matCellDef="let match">
                 <button mat-button (click)="onDeleteMatchClick($event, match.id)">
                     <mat-icon>delete</mat-icon>

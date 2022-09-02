@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { map, Observable, shareReplay, tap } from 'rxjs';
 import { PlayerDTO } from 'src/app/core/entity/response/player/player-dto';
 import { PlayerService } from 'src/app/core/services/player.service';
-import { playerCreate, playerUpdate } from 'src/app/core/services/rest';
+import { playerCreate } from 'src/app/core/services/rest';
 import { SnackBarService } from 'src/app/core/services/snackbar.service';
 import { WarningDialogComponent } from 'src/app/shared/dialog-components/warning-dialog/warning-dialog.component';
 import { WarningType } from 'src/app/shared/models/warning-type';
@@ -38,7 +38,7 @@ export class PlayersComponent implements OnInit {
   getAllPlayers() {
     this.players$ = this.playerService.getAllPlayers()
       .pipe(
-        shareReplay(),
+        shareReplay(1),
         map((players: any) => {
           let dataSource = new MatTableDataSource<PlayerDTO>(players);
           dataSource.paginator = this.paginator;
@@ -51,11 +51,6 @@ export class PlayersComponent implements OnInit {
   onCreatePlayerClick(event: Event): void {
     event.stopPropagation();
     this.router.navigate([playerCreate]);
-  }
-
-  onEditPlayerClick(event: Event, playerId: number): void {
-    event.stopPropagation();
-    this.router.navigate([playerUpdate, playerId]);
   }
 
   onDeletePlayerClick(event: Event, playerId: number): void {

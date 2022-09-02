@@ -71,16 +71,4 @@ export class MatchesComponent implements OnInit {
       }
     })
   }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-
-    this.matches$ = this.matches$.pipe(map((matches) => {
-      let dataSource = matches;
-      dataSource.paginator = this.paginator;
-      dataSource.filter = filterValue.trim().toLowerCase();
-      return dataSource;
-    }))
-  }
-
 }

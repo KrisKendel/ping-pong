@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { combineLatest, forkJoin, map, Observable, shareReplay, startWith, tap, withLatestFrom } from 'rxjs';
+import { combineLatest, forkJoin, map, Observable, shareReplay, startWith } from 'rxjs';
 import { MatchDTO } from 'src/app/core/entity/response/match/match-dto';
 import { PlayerDTO } from 'src/app/core/entity/response/player/player-dto';
 import { MatchService } from 'src/app/core/services/match.service';
@@ -24,7 +23,6 @@ export class AddMatchComponent implements OnInit {
   players$: Observable<PlayerDTO[]>;
   firstPlayerSelect$: Observable<PlayerDTO[]>;
   secondPlayerSelect$: Observable<PlayerDTO[]>;
-  afterSelection$: Observable<any>;
   playerOnePoints = 0;
   playerTwoPoints = 0;
   playerOne: PlayerDTO;
@@ -35,7 +33,6 @@ export class AddMatchComponent implements OnInit {
     private snackBarService: SnackBarService,
     private formBuilder: FormBuilder,
     private matchService: MatchService,
-    private router: Router,
     private playerService: PlayerService
   ) { }
 
@@ -80,7 +77,7 @@ export class AddMatchComponent implements OnInit {
     return this.matchForm.controls["results"] as FormArray;
   }
 
-  addResultFormGroup(maxSets: number) {
+  addResultFormGroup(maxSets: number): void {
     if (maxSets < 4) {
       const resultForm = this.formBuilder.group({
         playerOneResult: this.formBuilder.control('', Validators.required),
@@ -90,7 +87,7 @@ export class AddMatchComponent implements OnInit {
     }
   }
 
-  validateSet(playerOneResult: string, playerTwoResult: string, i: number) {
+  validateSet(playerOneResult: string, playerTwoResult: string, i: number): void {
     if (this.validation(playerOneResult, playerTwoResult, i) === Players.PLAYER_ONE) {
       this.addResultFormGroup(i);
       this.disableButton(i);
@@ -131,7 +128,7 @@ export class AddMatchComponent implements OnInit {
     return null
   }
 
-  disableButton(i: number) {
+  disableButton(i: number): void {
     this.buttons[i] = true;
     this.warnings[i] = false;
     const button = document.querySelector('.validate-button-' + i);
@@ -159,10 +156,9 @@ export class AddMatchComponent implements OnInit {
           this.snackBarService.createSnackBar('Error while creating match!');
         })
       })
-
   }
 
-  refreshForm() {
+  refreshForm(): void {
     this.playerTwoPoints = 0;
     this.playerOnePoints = 0;
     this.buttons = Array(5).fill(false);
