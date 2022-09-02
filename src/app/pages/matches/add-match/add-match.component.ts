@@ -87,6 +87,10 @@ export class AddMatchComponent implements OnInit {
     }
   }
 
+  deleteResultFormGroup(index: number) {
+    this.results.removeAt(index);
+  }
+
   validateSet(playerOneResult: string, playerTwoResult: string, i: number): void {
     if (this.validation(playerOneResult, playerTwoResult, i) === Players.PLAYER_ONE) {
       this.addResultFormGroup(i);
@@ -98,6 +102,14 @@ export class AddMatchComponent implements OnInit {
       this.playerTwoPoints++;
     } else {
       this.throwWarning(i);
+    }
+
+    if (this.playerOnePoints === 3) {
+      this.allMatchesValid = true;
+      this.deleteResultFormGroup(i + 1);
+    } else if (this.playerTwoPoints === 3) {
+      this.allMatchesValid = true;
+      this.deleteResultFormGroup(i + 1);
     }
   }
 
