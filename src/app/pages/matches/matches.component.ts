@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -15,7 +15,8 @@ import { WarningType } from 'src/app/shared/models/warning-type';
 @Component({
   selector: 'app-matches',
   templateUrl: './matches.component.html',
-  styleUrls: ['./matches.component.scss']
+  styleUrls: ['./matches.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MatchesComponent implements OnInit {
   matches$: Observable<any>;
@@ -28,7 +29,8 @@ export class MatchesComponent implements OnInit {
     private matchService: MatchService,
     private dialog: MatDialog,
     private snackBarService: SnackBarService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -63,6 +65,7 @@ export class MatchesComponent implements OnInit {
           next: (() => {
             this.snackBarService.createSnackBar('Match deleted!');
             this.getAllMatches();
+            this.cdr.markForCheck();
           }),
           error: (() => {
             this.snackBarService.createSnackBar('Deletion failed!')

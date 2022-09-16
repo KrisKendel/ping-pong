@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
-import { combineLatest, forkJoin, map, Observable, shareReplay, startWith } from 'rxjs';
+import { combineLatest, forkJoin, map, Observable, of, shareReplay, startWith, tap } from 'rxjs';
 import { MatchDTO } from 'src/app/core/entity/response/match/match-dto';
 import { PlayerDTO } from 'src/app/core/entity/response/player/player-dto';
 import { MatchService } from 'src/app/core/services/match.service';
@@ -11,7 +11,8 @@ import { Players } from 'src/app/shared/models/players';
 @Component({
   selector: 'app-add-match',
   templateUrl: './add-match.component.html',
-  styleUrls: ['./add-match.component.scss']
+  styleUrls: ['./add-match.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddMatchComponent implements OnInit {
   matchForm: FormGroup;
@@ -45,7 +46,7 @@ export class AddMatchComponent implements OnInit {
       this.players$
     ]).pipe(
       map(([playerTwo, players]) =>
-        players.filter((player) => player.id !== playerTwo?.id)
+        players.filter((player: any) => player.id !== playerTwo?.id)
       )
     );
 
@@ -177,7 +178,6 @@ export class AddMatchComponent implements OnInit {
     this.buttons = Array(5).fill(false);
     this.warnings = Array(5).fill(false);
     this.matchForm.reset();
-    this.generateAddForm();
   }
 
 }

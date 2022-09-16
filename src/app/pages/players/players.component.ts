@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -15,7 +15,8 @@ import { WarningType } from 'src/app/shared/models/warning-type';
 @Component({
   selector: 'app-players',
   templateUrl: './players.component.html',
-  styleUrls: ['./players.component.scss']
+  styleUrls: ['./players.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlayersComponent implements OnInit {
   players$: Observable<any>;
@@ -29,6 +30,7 @@ export class PlayersComponent implements OnInit {
     private dialog: MatDialog,
     private snackBarService: SnackBarService,
     private router: Router,
+    private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -63,6 +65,7 @@ export class PlayersComponent implements OnInit {
           next: (() => {
             this.snackBarService.createSnackBar('Player deleted!');
             this.getAllPlayers();
+            this.cdr.markForCheck();
           }),
           error: (() => {
             this.snackBarService.createSnackBar('Deletion failed!');

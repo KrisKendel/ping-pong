@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { PlayerDTO } from 'src/app/core/entity/response/player/player-dto';
@@ -7,7 +7,8 @@ import { PlayerService } from 'src/app/core/services/player.service';
 @Component({
   selector: 'app-view-player',
   templateUrl: './view-player.component.html',
-  styleUrls: ['./view-player.component.scss']
+  styleUrls: ['./view-player.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ViewPlayerComponent implements OnInit {
   player$: Observable<PlayerDTO>;
