@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## 1. Starting JSON server for backend mock
 
-Navigate to src/assets/server , in terminal run json-server db.json blablabla
+Navigate to src/assets/server , in terminal run json-server db.json
 
 ## 2. Development server
 
